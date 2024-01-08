@@ -19,6 +19,8 @@ RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
 
 RUN cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/core/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/core \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/database/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/database \
+    && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/go.mod ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/go.mod \
+    && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/go.sum ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/go.sum \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/log/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/log \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/media/img/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/media/img \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/parser/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/parser \
@@ -26,7 +28,7 @@ RUN cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/cor
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/vendor/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/vendor
 
 RUN set -ex \
-        && cd ${PROJECT_DIR}/ && go get ./... && go build -o evilginx \
+        && cd ${PROJECT_DIR}/ && go get ./... && go build -o evilginx -mod=mod \
 		&& cp ${PROJECT_DIR}/build/evilginx ${EVILGINX_BIN} \
 		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
 
