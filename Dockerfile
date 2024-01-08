@@ -26,7 +26,7 @@ RUN cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/cor
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/vendor/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/vendor
 
 RUN set -ex \
-        && cd ${PROJECT_DIR}/ && go get ./... && make \
+        && cd ${PROJECT_DIR}/ && go get ./... && go build -o evilginx \
 		&& cp ${PROJECT_DIR}/build/evilginx ${EVILGINX_BIN} \
 		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
 
