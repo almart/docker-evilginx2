@@ -19,7 +19,7 @@ RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
 
 RUN cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/core/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/core \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/database/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/database \
-    && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/go.mod ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/go.mod \
+    # && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/go.mod ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/go.mod \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/go.sum ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/go.sum \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/main.go ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/main.go \
     && cp -r ${GOPATH}/src/github.com/${EVILGOPHISH_USER}/evilgophish/evilginx3/log/. ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2/log \
