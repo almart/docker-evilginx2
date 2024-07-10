@@ -17,13 +17,6 @@ RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2 
 
 
-
-RUN set -ex \
-        && cd ${PROJECT_DIR}/ && sed -n -e '183p;350p;377,379p;381p;407p;562,566p;580p;1456,1463p' core/http_proxy.go && sed -n -e '993p' core/phishlet.go && sed -i '993s/.*/                re, err := regexp.Compile(d)/' core/phishlet.go && go get ./... && make \
-		&& cp ${PROJECT_DIR}/build/evilginx ${EVILGINX_BIN} \
-		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
-
-
 # Remove IOCs
 ## Remove the Evilginx header
 RUN set -ex \
@@ -40,6 +33,14 @@ RUN set -ex \
 # Add date to EvilGinx3 log
 RUN set -ex \
     && sed -i 's/"%02d:%02d:%02d", t.Hour()/"%02d\/%02d\/%04d - %02d:%02d:%02d", t.Day(), int(t.Month()), t.Year(), t.Hour()/g' ${PROJECT_DIR}/log/log.go
+
+
+RUN cd ${PROJECT_DIR} \
+      && go get ./... && make \
+		&& cp ${PROJECT_DIR}/build/evilginx ${EVILGINX_BIN} \
+		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
+
+# && cd ${PROJECT_DIR}/ && sed -n -e '183p;350p;377,379p;381p;407p;562,566p;580p;1456,1463p' core/http_proxy.go && sed -n -e '993p' core/phishlet.go && sed -i '993s/.*/                re, err := regexp.Compile(d)/' core/phishlet.go && 
 
 COPY ./docker-entrypoint.sh /opt/
 RUN chmod +x /opt/docker-entrypoint.sh
