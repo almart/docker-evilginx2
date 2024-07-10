@@ -23,14 +23,19 @@ RUN set -ex \
 		&& cp ${PROJECT_DIR}/build/evilginx ${EVILGINX_BIN} \
 		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
 
+
+# Remove IOCs
+## Remove the Evilginx header
+RUN set -ex \
+    && sed -i -e 's/req.Header.Set(p.getHomeDir(), o_host)/\/\/req.Header.Set(p.getHomeDir(), o_host)/g' ${PROJECT_DIR}/core/http_proxy.go
 ## Rename the selfsigned certificate used in developer mode (Thx to @Dreyvor - https://github.com/Dreyvor)
 RUN set -ex \
    && sed -i -e "s/Evilginx Signature Trust Co./${ORGANISATION_NAME}/g" \
-   -e "s/Evilginx Super-Evil Root CA/${COMMON_NAME}/g" core/certdb.go
+   -e "s/Evilginx Super-Evil Root CA/${COMMON_NAME}/g" ${PROJECT_DIR}/core/certdb.go
 
 # Add "security" & "tech" TLD
 RUN set -ex \
-    && sed -i 's/arpa/security\|arpa/g' core/http_proxy.go
+    && sed -i 's/arpa/security\|arpa/g' ${PROJECT_DIR}/core/http_proxy.go
 
 # Add date to EvilGinx3 log
 RUN set -ex \
