@@ -21,6 +21,19 @@ RUN set -ex \
 		&& cp ${PROJECT_DIR}/build/evilginx ${EVILGINX_BIN} \
 		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
 
+## Rename the selfsigned certificate used in developer mode (Thx to @Dreyvor - https://github.com/Dreyvor)
+RUN set -ex \
+   && sed -i -e "s/Evilginx Signature Trust Co./${ORGANISATION_NAME}/g" \
+   -e "s/Evilginx Super-Evil Root CA/${COMMON_NAME}/g" core/certdb.go
+
+# Add "security" & "tech" TLD
+RUN set -ex \
+    && sed -i 's/arpa/security\|arpa/g' core/http_proxy.go
+
+# Add date to EvilGinx3 log
+RUN set -ex \
+    && sed -i 's/"%02d:%02d:%02d", t.Hour()/"%02d\/%02d\/%04d - %02d:%02d:%02d", t.Day(), int(t.Month()), t.Year(), t.Hour()/g' ${PROJECT_DIR}/log/log.go
+
 COPY ./docker-entrypoint.sh /opt/
 RUN chmod +x /opt/docker-entrypoint.sh
 		
