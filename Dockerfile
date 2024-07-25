@@ -5,7 +5,7 @@ ARG COMMIT="local"
 ARG VERSION="v3.3.0"
 
 ENV GITHUB_USER="kgretzky"
-ENV GITHUB_USER="almart"
+ENV GITHUB_USER="kgretzky"
 ENV EVILGINX_REPOSITORY="github.com/${GITHUB_USER}/evilginx2"
 ENV INSTALL_PACKAGES="git make gcc musl-dev go"
 ENV PROJECT_DIR="${GOPATH}/src/${EVILGINX_REPOSITORY}"
@@ -15,7 +15,7 @@ ARG COMMON_NAME="DenSecure CA"
 
 RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && apk add --no-cache ${INSTALL_PACKAGES} \
-    && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2 
+    && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2 && git checkout 68d45d0
 
 
 # Remove IOCs
