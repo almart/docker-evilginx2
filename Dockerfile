@@ -17,7 +17,7 @@ RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2
 
 RUN  cd ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2 \
-	&& git checkout e3bef94
+	&& git checkout f4d5113
 
 # Remove IOCs
 ## Remove the Evilginx3 header
