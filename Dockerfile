@@ -15,7 +15,7 @@ ARG COMMON_NAME="DenSecure CA"
 
 RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && apk add --no-cache ${INSTALL_PACKAGES} \
-    && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2 && cd evilginx2 && git checkout 68d45d0
+    && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2 && cd ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2 && git checkout 68d45d0
 
 
 # Remove IOCs
