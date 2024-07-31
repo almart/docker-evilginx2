@@ -16,8 +16,8 @@ RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && apk add --no-cache ${INSTALL_PACKAGES} \
     && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2
 
-RUN  cd ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2 \
-	&& git checkout f4d5113
+RUN  cd ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2 
+	
 
 # Remove IOCs
 ## Remove the Evilginx3 header
