@@ -49,7 +49,7 @@ RUN set -ex \
 RUN cd ${PROJECT_DIR} \
       && go get ./... && make \
 		&& cp ${PROJECT_DIR}/build/evilginx ${EVILGINX_BIN} \
-		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
+		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* 
 
 # The below comment was used previously for Evilginx2 Phishlet support and to remove IoCs by line. However, can be dangerous to randomly remove lines as code changes we can accidently delete critical HTTP functionality.
 # && cd ${PROJECT_DIR}/ && sed -n -e '183p;350p;377,379p;381p;407p;562,566p;580p;1456,1463p' core/http_proxy.go && sed -n -e '993p' core/phishlet.go && sed -i '993s/.*/                re, err := regexp.Compile(d)/' core/phishlet.go && 
