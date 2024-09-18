@@ -4,7 +4,7 @@ ARG BUILD_RFC3339="1970-01-01T00:00:00Z"
 ARG COMMIT="local"
 ARG VERSION="v3.3.0"
 ARG GOPATH=/opt/go
-ENV GITHUB_USER="kgretzky"
+ENV GITHUB_USER="almart"
 ENV EVILGINX_REPOSITORY="github.com/${GITHUB_USER}/evilginx2"
 ENV INSTALL_PACKAGES="git make gcc musl-dev go"
 ENV PROJECT_DIR="${GOPATH}/src/${EVILGINX_REPOSITORY}"
@@ -16,7 +16,7 @@ RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && apk add --no-cache ${INSTALL_PACKAGES} \
     && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2
 
-RUN  cd ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2  && git checkout edadd52
+RUN  cd ${GOPATH}/src/github.com/${GITHUB_USER}/evilginx2 
 	
 
 # Remove IOCs
