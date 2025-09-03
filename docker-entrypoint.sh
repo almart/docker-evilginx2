@@ -2,4 +2,4 @@
 #
 #
 #
-/bin/evilginx -p /phishlets -c /config -developer -debug -g /data/data.db
+/bin/evilginx -p /phishlets -c /config -developer -g /data/data.db
